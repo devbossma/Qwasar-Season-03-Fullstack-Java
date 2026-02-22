@@ -85,6 +85,28 @@
 //     Quest04.ex01.Solution.main();
 
      System.out.println("< ======= ex02 ======= >");
+//     Executor.main();
 
-     Executor.main();
+
+     System.out.println("< ======= Quest05 Start Here ======= >");
+
+     System.out.println("< ======= ex00 ======= >");
+//     System.out.println(Quest05.ex00.Solution.my_java_journey_init_vector());
+
+     System.out.println("< ======= ex01 ======= >");
+//     String[] items = {"Hello", "world", "!"};
+//     Vector<String> array = new Vector<String>(Arrays.asList(items));
+//     Quest05.ex01.Solution.my_java_journey_print_vector(array);
+
+     System.out.println("< ======= ex02 ======= >");
+//     Integer[] items = {1, 2, 3, 4};
+//     Vector<Integer> array = new Vector<Integer>(Arrays.asList(items));
+//     Quest05.ex02.Solution.my_java_journey_print_int_list(array);
+
+     System.out.println("< ======= ex03 ======= >");
+//     String[] items = {"Hello", "world", "!"};
+//     LinkedList<String> list = new LinkedList<String>(Arrays.asList(items));
+//     Quest05.ex03.Solution.my_java_journey_print_string_linkedlist(list);
+
+
  }
