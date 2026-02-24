@@ -1,0 +1,142 @@
+Lets Put This Together
+
+Technical details	
+Submit file	./src/main/java/*.java, pom.xml or build.gradle, README.md, etc.
+Building a Microservice-based Application with Spring Cloud
+Objective
+Develop a microservice-based application that utilizes multiple external APIs for a comprehensive service. The application will leverage Netflix Eureka for service discovery and Netflix Zuul for API gateway functionality.
+
+Project Overview
+The application will simulate a travel booking system, allowing users to search for flights, hotels, and car rentals through various external APIs. It will consist of multiple microservices, each responsible for a specific functionality, and will be designed to communicate seamlessly using Spring Cloud features.
+
+Requirements
+1. Project Structure
+Organize your project into the following microservices:
+
+travel-booking/
+|-- discovery-service/
+|-- api-gateway/
+|-- flight-service/
+|-- hotel-service/
+|-- car-rental-service/
+|-- pom.xml
+2. Microservices Implementations
+A. Discovery Service
+Service: Uses Netflix Eureka for service discovery.
+
+Example DiscoveryServiceApplication.java
+
+@SpringBootApplication
+@EnableEurekaServer
+public class DiscoveryServiceApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(DiscoveryServiceApplication.class, args);
+    }
+}
+B. API Gateway
+Service: Uses Netflix Zuul as an API gateway to route requests to the appropriate services.
+
+Example ApiGatewayApplication.java
+
+@SpringBootApplication
+@EnableZuulProxy
+public class ApiGatewayApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(ApiGatewayApplication.class, args);
+    }
+}
+C. Flight Service
+Service: Integrates with an external flight API (e.g., Skyscanner or Amadeus) to search for flights.
+
+Example FlightServiceApplication.java
+
+@SpringBootApplication
+@EnableEurekaClient
+public class FlightServiceApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(FlightServiceApplication.class, args);
+    }
+}
+Example FlightController.java
+
+@RestController
+@RequestMapping("/flights")
+public class FlightController {
+    
+    @GetMapping("/search")
+    public ResponseEntity<List<Flight>> searchFlights(@RequestParam String origin, @RequestParam String destination) {
+    }
+}
+D. Hotel Service
+Service: Integrates with an external hotel booking API (e.g., Booking.com or Hotels.com) to search for hotels.
+
+Example HotelServiceApplication.java
+
+@SpringBootApplication
+@EnableEurekaClient
+public class HotelServiceApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(HotelServiceApplication.class, args);
+    }
+}
+Example HotelController.java
+
+@RestController
+@RequestMapping("/hotels")
+public class HotelController {
+    
+    @GetMapping("/search")
+    public ResponseEntity<List<Hotel>> searchHotels(@RequestParam String location) {
+    }
+}
+E. Car Rental Service
+Service: Integrates with an external car rental API (e.g., Rentalcars.com or Enterprise) to search for cars.
+
+Example CarRentalServiceApplication.java
+
+@SpringBootApplication
+@EnableEurekaClient
+public class CarRentalServiceApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(CarRentalServiceApplication.class, args);
+    }
+}
+Example CarRentalController.java
+
+@RestController
+@RequestMapping("/cars")
+public class CarRentalController {
+    
+    @GetMapping("/search")
+    public ResponseEntity<List<Car>> searchCars(@RequestParam String location) {
+    }
+}
+3. External API Integration
+Use libraries like RestTemplate or WebClient to call the external APIs from each service.
+Create service classes to encapsulate the API calls and handle responses.
+4. Running the Application
+Set up Eureka Discovery Server: Run the discovery service.
+
+Run API Gateway: Run the API Gateway.
+
+Run Microservices: Run the flight, hotel, and car rental services.
+
+Testing: Use Postman or a similar tool to test the API Gateway endpoints.
+
+5. Example API Gateway Endpoint
+Get Flights: GET http://localhost:8080/flights/search?origin=NYC&destination=LAX
+
+Get Hotels: GET http://localhost:8080/hotels/search?location=LosAngeles
+
+Get Cars: GET http://localhost:8080/cars/search?location=LosAngeles
+
+Additional Resources:
+
+Spring Cloud Documentation:
+https://spring.io/projects/spring-cloud
+
+Netflix Eureka Documentation
+https://github.com/Netflix/eureka
+
+Netflix Zuul Documentation
+https://github.com/Netflix/zuul

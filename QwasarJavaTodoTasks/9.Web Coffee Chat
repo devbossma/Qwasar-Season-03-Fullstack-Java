@@ -1,0 +1,226 @@
+Web Coffee Chat
+
+Technical details	
+Submit file	./src/main/java/*.java, pom.xml or build.gradle, README.md, etc.
+I want my Coffee on the Web!
+Objective
+Build a coffee shop application using Java Servlets, JSP (JavaServer Pages), and the MVC (Model-View-Controller) design pattern. The application will allow customers to place orders and view their order statuses through a web interface.
+
+Application Overview
+This coffee shop application will enable customers to:
+
+View different types of coffee available for order.
+
+Place orders and check their statuses.
+
+Communicate with baristas via a simple chat interface (simulated via form submissions).
+
+Requirements
+1. Project Structure
+Organize your project into the following directories:
+
+coffee-shop-app/
+|-- src/
+|   |-- model/
+|   |-- controller/
+|   |-- service/
+|-- web/
+|   |-- WEB-INF/
+|       |-- web.xml
+|       |-- views/
+|           |-- index.jsp
+|           |-- orders.jsp
+|-- lib/
+2. Implementations
+A. Model Layer
+Define the data models for the application.
+Example Coffee.java
+
+package model;
+
+public class Coffee {
+    private String type;
+    private double price;
+
+    public Coffee(String type, double price) {
+        this.type = type;
+        this.price = price;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+}
+B. Service Layer
+Create a service class to manage orders and coffee types.
+Example CoffeeShopService.java
+
+package service;
+        [...]
+
+public class CoffeeShopService {
+    private List<Coffee> coffees;
+    private List<Order> orders;
+    private int orderIdCounter;
+
+    public CoffeeShopService() {
+        coffees = new ArrayList<>();
+        orders = new ArrayList<>();
+        orderIdCounter = 1;
+
+        [...]
+    }
+
+    public List<Coffee> getCoffees() {
+        [...]
+    }
+
+    public void placeOrder(String coffeeType) {
+        [...]
+    }
+
+    public List<Order> getOrders() {
+        [...]
+    }
+}
+C. Controller Layer
+Create servlets to handle incoming requests and direct them to the appropriate views.
+Example CoffeeShopController.java
+
+package controller;
+
+        [...]
+
+@WebServlet("/coffeeshop")
+public class CoffeeShopController extends HttpServlet {
+    private CoffeeShopService coffeeShopService;
+
+    @Override
+    public void init() {
+        [...]
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        [...]
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        [...]
+    }
+
+    @WebServlet("/coffeeshop/orders")
+    public class OrderController extends HttpServlet {
+        private CoffeeShopService coffeeShopService;
+
+        @Override
+        public void init() {
+        [...]
+        }
+
+        @Override
+        protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        [...]
+        }
+    }
+}
+D. View Layer
+Create JSP files to render the user interface.
+Example index.jsp
+
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>Coffee Shop</title>
+</head>
+<body>
+<h1>Welcome to the Coffee Shop</h1>
+<form action="coffeeshop" method="post">
+    <label for="coffeeType">Choose your coffee:</label>
+    <select name="coffeeType" id="coffeeType">
+        <c:forEach var="coffee" items="${coffees}">
+            <option value="${coffee.type}">${coffee.type} - {coffee.price}</option>
+        </c:forEach>
+    </select>
+    <input type="submit" value="Order">
+</form>
+<a href="coffeeshop/orders">View Orders</a>
+</body>
+</html>
+Example orders.jsp
+
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>Orders</title>
+</head>
+<body>
+<h1>Current Orders</h1>
+<table>
+    <tr>
+        <th>Order ID</th>
+        <th>Coffee Type</th>
+        <th>Status</th>
+    </tr>
+    <c:forEach var="order" items="${orders}">
+        <tr>
+            <td>${order.id}</td>
+            <td>${order.coffeeType}</td>
+            <td>${order.status}</td>
+        </tr>
+    </c:forEach>
+</table>
+<a href="coffeeshop">Back to Coffee Shop</a>
+</body>
+</html>
+3. Web Configuration
+Configure the web application by defining the web.xml file.
+Example web.xml
+
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee 
+         http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1">
+
+    <servlet>
+        <servlet-name>CoffeeShopController</servlet-name>
+        [...]
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>CoffeeShopController</servlet-name>
+        [...]
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>OrderController</servlet-name>
+        [...]
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>OrderController</servlet-name>
+        [...]
+    </servlet-mapping>
+</web-app>
+4. Running the Application
+Package the application as a WAR file.
+
+Deploy it on a servlet container like Apache Tomcat.
+
+Access the application via a web browser at http://localhost:8080/coffee-shop-app/coffeeshop.
+
+Additional Resources:
+Java Servlet Specification
+https://jakarta.ee/specifications/servlet/
+
+JavaServer Pages (JSP) Specification
+https://jakarta.ee/specifications/pages/
+
+MVC Design Pattern
+https://www.oracle.com/java/technologies/servlet-mvc.html

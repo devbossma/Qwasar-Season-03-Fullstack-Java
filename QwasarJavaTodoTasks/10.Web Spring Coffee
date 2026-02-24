@@ -1,0 +1,146 @@
+Web Spring Coffee
+
+Technical details	
+Submit file	./src/main/java/*.java, pom.xml or build.gradle, README.md, etc.
+I want my Coffee on the Web, FASTER!
+Objective
+Enhance the coffee shop application to incorporate Spring MVC for web functionalities, Hibernate for database interactions, and WebSocket for real-time communication between customers and baristas.
+
+Application Overview
+This enhanced coffee shop application will allow customers to:
+
+Place orders through a web interface.
+
+Communicate with baristas in real-time using WebSocket.
+
+View order status updates immediately as they happen.
+
+Manage coffee orders and chat history stored in a database using Hibernate.
+
+Requirements
+1. Project Structure:
+Create a Spring Boot project with the following packages:
+controller
+service
+repository
+model
+config
+websocket
+factory
+observer
+strategy
+decorator
+singleton
+command
+adapter
+facade
+prototype
+template
+2. Implementations:
+A. Spring MVC for Web Interface
+Controller Layer: Create controllers to handle web requests for placing orders and viewing order statuses.
+
+Thymeleaf Template Engine: Use Thymeleaf for rendering HTML views.
+
+Example Controller
+
+
+@Controller
+public class CoffeeShopController {
+
+    @GetMapping("/")
+    public String home(Model model) {
+        [...]
+    }
+
+    @PostMapping("/order")
+    public String placeOrder(Order order) {
+        [...]
+    }
+
+    @GetMapping("/orders")
+    public String viewOrders(Model model) {
+        [...]
+    }
+}
+B. Hibernate for Database Interactions
+Entity Classes: Define entity classes for Order, Coffee, and ChatMessage using Hibernate annotations.
+Example Entity
+
+import javax.persistence.*;
+
+@Entity
+public class Order {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    
+    private String coffeeType;
+    private String status;
+}
+Repository Layer: Use Spring Data JPA repositories to manage database operations.
+Example Repository
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface OrderRepository extends JpaRepository<Order, Long> {
+    List<Order> findByStatus(String status);
+}
+C. WebSocket for Real-Time Communication
+WebSocket Configuration: Set up WebSocket configuration for handling chat and order notifications.
+Example WebSocket Configuration
+
+
+@Configuration
+@EnableWebSocket
+public class WebSocketConfig implements WebSocketConfigurer {
+    @Override
+    public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
+        registry.addHandler(new ChatWebSocketHandler(), "/chat").setAllowedOrigins("*");
+    }
+}
+WebSocket Handler: Implement a handler to manage WebSocket messages.
+Example WebSocket Handler
+
+import org.springframework.web.socket.TextMessage;
+import org.springframework.web.socket.WebSocketSession;
+import org.springframework.web.socket.handler.TextWebSocketHandler;
+
+public class ChatWebSocketHandler extends TextWebSocketHandler {
+    @Override
+    public void handleTextMessage(WebSocketSession session, TextMessage message) {
+    }
+}
+3. Application Flow:
+Customers access the web application to view coffee options and place orders.
+
+Orders are processed and stored in the database using Hibernate.
+
+Customers and baristas communicate in real-time through the WebSocket connection.
+
+Customers receive immediate updates on their order status.
+
+4. Database Configuration:
+Configure Hibernate with Spring Boot in application.properties.
+spring.datasource.url=jdbc:mysql://localhost:3306/coffeeshop
+spring.datasource.username=root
+spring.datasource.password=yourpassword
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+5. Security (Optional):
+Implement basic security using Spring Security for authentication and authorization.
+
+/*
+Additional Resources:
+Spring MVC Documentation
+https://docs.spring.io/spring-framework/docs/current/reference/html/web.html
+
+Spring Data JPA Documentation
+https://docs.spring.io/spring-data/jpa/docs/current/reference/html/
+
+Spring WebSocket Documentation:
+https://docs.spring.io/spring-framework/docs/current/reference/html/web.html#websocket
+
+Hibernate Documentation
+https://hibernate.org/orm/documentation/
+*/

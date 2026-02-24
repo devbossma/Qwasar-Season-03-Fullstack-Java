@@ -1,0 +1,70 @@
+My Multithread
+
+Technical details	
+Submit file	./src/main/java/*.java, pom.xml or build.gradle, README.md, etc.
+Multithreading in an Application context
+Objective
+Extend the coffee shop application to support multithreading, allowing multiple customers to place orders simultaneously and manage their requests concurrently.
+
+Project Overview
+In this enhanced coffee shop application, customers will place orders, and baristas will prepare those orders in a multithreaded environment. The application will showcase various multithreading concepts such as thread creation, synchronization, and managing shared resources.
+
+Requirements
+Core Features
+Allow multiple customers to place orders concurrently.
+
+Baristas (threads) will prepare orders in the background.
+
+Implement a queue to manage incoming orders.
+
+Notify customers when their orders are ready.
+
+Demonstrate synchronization where necessary to ensure thread safety.
+
+Classes to Implement
+Customer: Represents a customer placing an order.
+
+Barista: Represents a barista preparing orders.
+
+Order: Represents an order placed by a customer.
+
+OrderQueue: A thread-safe queue for managing orders.
+
+CoffeeShop: Singleton to manage the coffee shop operations.
+
+CoffeeFactory, Decorators, etc.: As previously defined.
+
+Multithreading Concepts to Explore
+Creating and managing threads using the Thread class and Runnable interface.
+
+Synchronization techniques (e.g., using synchronized, ReentrantLock, etc.).
+
+Producer-consumer problem using a thread-safe queue.
+
+Notifying customers about order completion using the Observer pattern.
+
+Implementation Steps
+1. OrderQueue Class
+Implement a thread-safe queue for managing orders.
+2. Customer Class
+Simulate customers placing orders in separate threads.
+3. Barista Class
+Simulate baristas preparing orders in separate threads.
+4. CoffeeShop Class
+Manage orders and synchronize access to the OrderQueue.
+5. Main Application
+Set up the main application to simulate customers and baristas.
+Evaluation Criteria
+Correct implementation of multithreading concepts in the coffee shop application.
+
+Proper synchronization and management of shared resources.
+
+Code quality and adherence to Java best practices.
+
+Clarity and completeness of documentation.
+
+Additional Resources
+Java Concurrency in Practice:
+https://www.oreilly.com/library/view/java-concurrency-in/9780321349606/
+Java Documentation on Threads:
+https://docs.oracle.com/javase/tutorial/essential/concurrency/index.html

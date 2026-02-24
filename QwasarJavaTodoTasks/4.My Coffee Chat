@@ -1,0 +1,85 @@
+My Coffee Chat
+
+Technical details	
+Submit file	./src/main/java/*.java, pom.xml or build.gradle, README.md, etc.
+Chat functionality (Part 01) + Desktop Interface with JavaFX (Part 02)
+Part 01
+Objective
+Extend the coffee shop application to include a chat feature where customers can interact with baristas, place orders through chat, and save conversation history to a database using JDBC.
+
+Project Overview
+Chat Interface: Customers can send messages to baristas, ask questions, and place orders.
+
+JDBC Integration: Store conversation history in a relational database.
+
+Multithreading: Continue to support concurrent interactions.
+
+Implementation Steps
+1. Database Setup
+Create a database and a table to store conversation history.
+2. JDBC Configuration
+Add JDBC dependencies to your pom.xml or build.gradle.
+3. Database Utility Class
+Create a utility class for managing database connections and operations.
+4. Chat Class
+Implement a chat class that allows customers to send messages.
+5. CoffeeShop Class Modifications
+Update the CoffeeShop class to handle incoming messages from the chat.
+6. Main Application
+Update the main application to launch the chat interface alongside barista threads.
+Running the Application
+1. Ensure your database is set up and running.
+2. Update the database connection details in DatabaseUtil.
+3. Compile and run your application as before (using Maven or Gradle).
+4. Customers can enter messages and place orders by typing commands (e.g., "order cappuccino").
+To enhance the coffee shop chat application with a desktop user interface, we can use JavaFX, which is a modern framework for building desktop applications in Java. JavaFX provides a rich set of UI controls and is suitable for creating a user-friendly chat application.
+
+Part 02
+Objective
+Create a desktop application that allows users to:
+
+View chat history.
+
+Send new messages.
+
+Upload and send photos.
+
+Implementation Steps
+1. Setup JavaFX
+Ensure you have JavaFX set up in your project.
+2. Create the Chat Interface
+The JavaFX application part should have the following components:
+
+A TextArea to display chat history.
+
+A TextField for entering new messages.
+
+A Button to send messages.
+
+A Button to upload photos.
+
+A ListView for showing uploaded images.
+
+3. Update the Main Application Entry
+Make sure to include JavaFX runtime arguments if necessary (e.g., for module path if you're using JDK 11 or above). Modify your main method to start the JavaFX application.
+Summary of Features
+Chat History Display: A TextArea shows the history of messages.
+
+Send New Messages: Users can enter messages into a TextField and send them via a button.
+
+Upload Photos: Users can select images to upload, which will be displayed in a ListView and stored in the database.
+
+Running the Application
+Ensure you have JavaFX configured properly in your project.
+
+Update the DatabaseUtil class as needed to save image upload information.
+
+Compile and run your application.
+
+Additional Notes
+Consider implementing a method to retrieve and display the full conversation history upon startup.
+
+You can enhance the chat experience by adding more features, such as user authentication, emojis, or message formatting.
+
+Ensure you have the necessary permissions to access and save files if you choose to upload images.
+

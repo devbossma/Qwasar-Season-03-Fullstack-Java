@@ -1,0 +1,57 @@
+My Design Pattern
+
+Technical details	
+Submit file	./src/main/java/*.java, pom.xml or build.gradle, README.md, etc.
+Design Patterns in an Application context
+Objective
+The application will simulate a coffee shop where customers can order different types of coffee and add various options.
+
+Application Overview The coffee shop will allow customers to
+Choose a type of coffee (e.g., Espresso, Cappuccino).
+
+Add extras (e.g., milk, sugar) using the Decorator pattern.
+
+Use a strategy for different pricing strategies based on customer loyalty.
+
+Notify customers about their order status using the Observer pattern.
+
+Create coffee types through a factory method.
+
+Requirements
+Create a Maven or Gradle project.
+
+Required Patterns
+1. Singleton Pattern
+Implement a CoffeeShop class to manage the orders and provide a global point of access.
+2. Factory Method Pattern
+Create a class to produce different types of coffee.
+3. Observer Pattern
+Implement an order notification system where customers can be notified when their order is ready.
+4. Strategy Pattern
+Implement at least 3 pricing strategies for customer loyalty.
+5. Decorator Pattern
+Allow customers to add extras to their coffee orders.
+6. Command Pattern
+Implement a command for processing orders.
+7. Adapter Pattern
+Create an adapter to integrate a payment service.
+8. Facade Pattern
+Implement a facade to simplify the coffee shop operations.
+9. Prototype Pattern
+Allow cloning of coffee orders.
+10. Template Method Pattern
+Define a template for preparing different types of coffee.
+Evaluation Criteria
+Correct implementation of design patterns within the application context.
+
+Code quality and adherence to Java best practices.
+
+Clarity and completeness of documentation.
+
+Functionality of unit tests.
+
+Additional Resources
+Refactoring Guru:
+https://refactoring.guru/design-patterns/java
+Java Design Patterns:
+https://java-design-patterns.com/

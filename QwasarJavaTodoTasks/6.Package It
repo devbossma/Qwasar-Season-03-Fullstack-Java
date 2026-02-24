@@ -1,0 +1,55 @@
+Package It
+
+Technical details	
+Submit file	./src/main/java/*.java, pom.xml or build.gradle, README.md, etc.
+Packaging the Coffee Shop Application
+Objective
+Package the complete coffee shop application, including the chat functionality, desktop interface, and unit tests. You'll learn how to create JAR files, generate test reports, and ensure the application is ready for distribution.
+
+Packaging Overview
+Project Structure: Ensure your project is organized with a clear separation of source and test file.
+
+Packaging as JAR: Depending on the nature of your application, you will package it as a JAR file.
+
+For Maven
+JAR Packaging: Update your pom.xml to include JavaFX dependencies and the main class.
+
+Build the JAR: Run the following command in your terminal:
+
+mvn clean package
+This will generate a JAR file in the target directory, which can be executed with:
+
+java -jar target/coffee-shop-app-1.0-SNAPSHOT.jar
+For Gradle
+JAR Packaging: In your build.gradle, include the necessary dependencies for JavaFX and JUnit.
+
+Build the JAR: Run the following command in your terminal:
+
+gradle clean build
+This will generate a JAR file in the build/libs directory. To run the application, use:
+
+java -jar build/libs/coffee-shop-app-1.0-SNAPSHOT.jar
+Summary of Packaging Steps
+Ensure your project structure is organized.
+
+Configure dependencies for JavaFX, JUnit, and JaCoCo in your build file (Maven or Gradle).
+
+Build the application to generate a JAR file:
+
+For Maven: mvn clean package
+For Gradle: gradle clean build
+Run the application using the generated JAR file.
+
+Generate and review test coverage reports using JaCoCo.
+
+Additional Guidelines
+Make sure all your code compiles without errors before packaging.
+Check that your tests cover critical functionalities, focusing on meaningful tests rather than just achieving high coverage.
+Document any known issues or areas for improvement in your application or tests.
+Submission
+Submit your entire project directory, including the packaged JAR file and test reports.
+Include a README file with instructions on how to run the application and view test coverage reports.
+Evaluation Criteria
+Correctness and completeness of packaging.
+Quality and coverage of tests.
+Organization of code and adherence to best practices.

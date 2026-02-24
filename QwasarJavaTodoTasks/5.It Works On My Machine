@@ -1,0 +1,58 @@
+It Works On My Machine
+
+Technical details	
+Submit file	./src/main/java/*.java, pom.xml or build.gradle, README.md, etc.
+Setting Up Tests with JUnit
+Objective
+Implement unit tests for the coffee shop application using JUnit. Learn best practices for writing tests, ensure code coverage, and understand the role of testing in software development.
+
+Assignment Overview
+Setup JUnit: Integrate JUnit into the coffee shop project.
+
+Write Unit Tests: Create tests for various components of the application, at least:
+
+Order processing.
+Chat functionality.
+Database interactions.
+CoffeShop Singleton creation and lifecycle.
+Measure Test Coverage: Use tools to measure the test coverage of the application.
+
+Best Practices: Follow best practices for writing clean and effective tests.
+
+Requirements
+Project Structure: Ensure your project structure follows a standard format, including a separate directory for test classes:
+
+JUnit Integration: For Maven or Gradle.
+
+Test Class Creation: Write separate test classes for different components, such as:
+
+OrderQueueTest
+ChatTest
+DatabaseUtilTest
+CoffeeShopTest
+Measuring Test Coverage
+For IntelliJ
+For Eclipse
+For VScode
+Best Practices for Testing
+Isolation: Each test should be independent. Use mocks where necessary to isolate units.
+
+Readability: Write clear and descriptive test names. Use comments to explain complex logic.
+
+Coverage: Aim for high code coverage but focus on meaningful tests rather than just achieving a percentage.
+
+Avoid Hardcoding: Use constants or enums for fixed values in tests to improve maintainability.
+
+Setup and Teardown: Use @BeforeEach and @AfterEach to manage setup and teardown processes.
+
+Evaluation Criteria
+Completeness and correctness of tests.
+Code coverage percentage and meaningful test cases.
+Adherence to best practices in writing tests.
+Clarity and organization of test code.
+
+Additional Resources
+JUnit 5 User Guide:
+https://junit.org/junit5/docs/current/user-guide/
+JaCoCo Documentation:
+https://www.jacoco.org/jacoco/trunk/doc/

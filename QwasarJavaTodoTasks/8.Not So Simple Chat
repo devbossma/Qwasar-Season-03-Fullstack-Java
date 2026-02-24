@@ -1,0 +1,218 @@
+Not So Simple Chat
+
+Technical details	
+Submit file	./src/main/java/*.java, pom.xml or build.gradle, README.md, etc.
+Coffee Shop Application with Spring Framework
+Part 01: Reimplement Design Patterns
+Part 02: Multithreading with Spring
+Part 03: Chat Functionality with Spring and JDBC
+Part 04: Testing with Spring Boot and JUnit
+Part01 - Objective
+Reimplement the coffee shop application using the Spring Framework, focusing on design patterns while utilizing Spring's features such as dependency injection, configuration, and web capabilities.
+
+Application Overview:
+The coffee shop application will allow customers to:
+
+Choose coffee types (e.g., Espresso, Cappuccino).
+Use the Decorator pattern for extras (e.g., milk, sugar).
+Implement different pricing strategies based on customer loyalty using the Strategy pattern.
+Notify customers about their order status through the Observer pattern.
+Create coffee types with the Factory Method pattern.
+Requirements:
+Project Structure
+Create a Spring Boot project using Spring Initializr or your preferred method.
+Organize code into packages:
+factory
+observer
+strategy
+decorator
+singleton
+command
+adapter
+facade
+prototype
+template
+model
+controller
+service
+repository
+Pattern Implementations
+1. Singleton Pattern
+Implement a CoffeeShop class as a singleton using Spring's @Component annotation to manage orders globally.
+2. Factory Method Pattern
+Create a CoffeeFactory class to produce different types of coffee, annotated with @Service.
+3. Observer Pattern
+Implement a notification system using Spring's ApplicationEventPublisher for customers to be notified when their order is ready.
+4. Strategy Pattern
+Define multiple pricing strategies as @Component classes that can be injected where needed.
+5. Decorator Pattern
+Create a base Coffee class and decorators for extras, utilizing Spring's dependency injection.
+6. Command Pattern
+Implement a command pattern for processing orders, potentially using Spring's @Transactional annotation for managing transactions.
+7. Adapter Pattern
+Create an adapter for integrating a payment service, which can be injected into the CoffeeShop.
+8. Facade Pattern
+Implement a facade service that simplifies interactions with the coffee shop's operations.
+9. Prototype Pattern
+Utilize Spring's prototype scope to allow cloning of coffee orders as needed.
+10. Template Method Pattern
+Define a template for preparing different types of coffee using abstract classes.
+Example Usage
+
+In the main application class, demonstrate the usage of the patterns with a REST controller for customer interactions. Use Spring Boot’s features to run the application.
+
+Additional Resources:
+Spring Framework Documentation: 
+https://spring.io/projects/spring-framework
+
+Spring Boot Documentation:
+https://spring.io/projects/spring-boot
+
+Design Patterns in Java:
+https://java-design-patterns.com/
+
+Refactoring Guru - Design Patterns:
+https://refactoring.guru/design-patterns/java
+
+Part02 - Objective
+Extend the coffee shop application to support multithreading using Spring's asynchronous capabilities, allowing multiple customers to place orders concurrently and manage requests effectively.
+
+Requirements:
+Core Features:
+
+Allow multiple customers to place orders concurrently.
+Use Spring's @Async for asynchronous order processing.
+Implement a thread-safe queue using Spring’s concurrency utilities.
+Notify customers about order readiness through events.
+Classes to Implement:
+
+Customer: A model representing a customer.
+Barista: A service class that simulates order preparation in an asynchronous manner.
+Order: A model representing a customer order.
+OrderQueue: A thread-safe queue for managing orders.
+CoffeeShop: Singleton service to manage coffee shop operations.
+CoffeeFactory, Decorators, etc.: As previously defined.
+Implementation Steps:
+1. OrderQueue Class
+Implement a thread-safe order queue using BlockingQueue.
+2. Customer Class
+Represent customers as entities that can place orders asynchronously.
+3. Barista Class
+Implement a service that processes orders asynchronously using @Async.
+4. CoffeeShop Class
+Manage order submissions and synchronization using Spring features.
+5. Main Application
+Set up the main application with Spring Boot to simulate concurrent customers and order processing.
+
+Additional Resources:
+Spring Asynchronous Methods:
+https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#async
+
+Java Concurrency in Practice:
+https://www.oreilly.com/library/view/java-concurrency-in/9780321349606/
+
+
+Part03 - Objective
+Extend the coffee shop application to include a chat feature where customers can interact with baristas, place orders through chat, and save conversation history to a database using Spring Data JPA.
+
+Implementation Steps:
+1. Database Setup
+Create a database schema to store conversation history, using Spring Data JPA for ORM.
+2. Chat Repository
+Implement a repository interface for managing chat records.
+3. Chat Service
+Create a service for handling chat logic and interactions.
+4. Chat Controller
+Implement a REST controller to facilitate chat operations.
+5. CoffeeShop Class Modifications
+Update the CoffeeShop class to handle incoming chat messages.
+Summary
+Chat Functionality: Implemented a RESTful interface for chat interactions.
+
+Database Persistence: Utilized Spring Data JPA for storing conversation history.
+
+Concurrent Interactions: Support for simultaneous customer-barista interactions.
+
+Running the Application
+Ensure your database is set up and running.
+
+Configure Spring Data JPA properties in application.properties.
+
+Compile and run your application using Spring Boot.
+
+Additional Notes
+Consider enhancing the chat experience with user authentication and message formatting.
+Ensure the application is well-documented and follows coding standards.
+Part04 - Objective
+Implement unit tests for the coffee shop application using JUnit and Spring Boot's testing capabilities. Focus on ensuring coverage and best practices in testing.
+
+Requirements:
+JUnit Setup: Ensure JUnit is included in your project dependencies.
+
+Test Class Creation: Write tests for various components of the application:
+
+OrderQueueTest
+ChatServiceTest
+CoffeeShopTest
+Mocking with Mockito: Utilize Mockito for mocking dependencies in your tests.
+
+Integration Testing: Write integration tests for REST endpoints using Spring's test framework.
+
+Example 00 - Order Queue
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+class OrderQueueTest {
+    private OrderQueue orderQueue;
+
+    @BeforeEach
+    void setUp() {
+        orderQueue = new OrderQueue();
+    }
+
+    @Test
+    void testAddOrder() {
+        Order order = new Order("Cappuccino");
+        orderQueue.addOrder(order);
+        assertEquals(1, orderQueue.size());
+    }
+}
+Example 01 - Chat
+
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+
+import static org.mockito.Mockito.*;
+
+class ChatServiceTest {
+    
+    @Mock
+    private ChatRepository chatRepository;
+
+    @InjectMocks
+    private ChatService chatService;
+
+    @BeforeEach
+    void init() {
+        MockitoAnnotations.openMocks(this);
+    }
+
+    @Test
+    void testSaveMessage() {
+        String message = "Hello!";
+        chatService.saveMessage("Customer", message);
+        verify(chatRepository).save(any(ChatMessage.class));
+    }
+}
+Additional Resources:
+
+Spring Boot Testing Documentation:
+https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-testing.html
+
+
+Mockito Documentation:
+https://site.mockito.org/

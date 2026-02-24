@@ -1,0 +1,148 @@
+Give Me The Code
+
+Technical details	
+Submit file	./src/main/java/*.java, pom.xml or build.gradle, README.md, etc.
+Give me the .... LeetCode API
+Objective
+Build a RESTful web service using Spring Boot that consumes the LeetCode API to fetch daily coding challenges. Implement Spring Security with JWT for authentication and authorization, and use HATEOAS for hypermedia-driven interactions. Store user challenge history, including attempted challenges, number of successful attempts, and failed attempts.
+
+Requirements
+1. Project Structure
+Organize your project with the following structure
+
+daily-coding-challenges/
+|-- src/
+|   |-- main/
+|   |   |-- java/
+|   |   |   |-- com/
+|   |   |       |-- example/
+|   |   |           |-- controller/
+|   |   |           |-- model/
+|   |   |           |-- service/
+|   |   |           |-- security/
+|   |   |           |-- repository/
+|   |   |           |-- config/
+|   |   |-- resources/
+|   |       |-- application.properties
+|-- pom.xml
+2. Implementations
+A. Model Layer
+Define the data models for challenges and user history.
+Example Challenge.java
+
+package com.example.model;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
+public class Challenge {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String title;
+    private String difficulty;
+}
+Example UserHistory.java
+
+package com.example.model;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
+public class UserHistory {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private Long userId;
+    private Long challengeId;
+    private boolean success;
+}
+B. Repository Layer
+Create repositories to manage database interactions.
+Example ChallengeRepository.java
+
+package com.example.repository;
+
+import com.example.model.Challenge;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface ChallengeRepository extends JpaRepository<Challenge, Long> {
+}
+Example UserHistoryRepository.java
+
+package com.example.repository;
+
+import com.example.model.UserHistory;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.List;
+
+public interface UserHistoryRepository extends JpaRepository<UserHistory, Long> {
+    List<UserHistory> findByUserId(Long userId);
+}
+C. Service Layer
+Create a service class to handle business logic.
+Example ChallengeService.java
+
+package com.example.service;
+
+import com.example.model.Challenge;
+import com.example.repository.ChallengeRepository;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class ChallengeService {
+    private final ChallengeRepository challengeRepository;
+
+    public ChallengeService(ChallengeRepository challengeRepository) {
+        this.challengeRepository = challengeRepository;
+    }
+
+    public List<Challenge> getDailyChallenges() {
+        return challengeRepository.findAll(); // This would be replaced with API fetching
+    }
+}
+D. Security Layer
+Implement JWT-based authentication.
+E. Controller Layer
+Create REST controllers to handle incoming requests.
+Example ChallengeController.java
+
+3. Configuration
+Set up your application properties for database connection and JWT secret.
+4. Running the Application
+Package the application using Maven.
+
+Run the application using ./mvnw spring-boot:run.
+
+Use a tool like Postman to test the REST APIs, ensuring you obtain a JWT token for authentication.
+
+5. Evaluation Criteria:
+Proper implementation of RESTful services.
+
+Effective use of Spring Security and JWT.
+
+HATEOAS principles applied in API responses.
+
+Comprehensive user history tracking.
+
+Code quality, adherence to best practices, and proper documentation.
+
+Additional Resources:
+
+Spring Boot Documentation
+https://spring.io/projects/spring-boot
+
+Spring Security Documentation
+https://spring.io/projects/spring-security
+
+LeetCode API Documentation
+https://leetcode.com/api

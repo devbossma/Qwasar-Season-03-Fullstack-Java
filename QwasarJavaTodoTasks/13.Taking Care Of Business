@@ -1,0 +1,121 @@
+Taking Care Of Business
+
+Technical details	
+Submit file	./src/main/java/*.java, pom.xml or build.gradle, README.md, etc.
+Implementing CI/CD for a Microservice-based Application
+Objective
+Develop a continuous integration and continuous deployment (CI/CD) pipeline for the previously created microservice-based travel booking application. This assignment will teach students how to automate testing, building, and deployment processes using Docker, Jenkins or Travis CI, Maven, code coverage tools, and cloud hosting services such as Heroku, DigitalOcean, or AWS.
+
+Project Overview
+Students will implement a CI/CD pipeline that includes building Docker images for each microservice, running tests, generating code coverage reports, and deploying the application to a cloud platform. This will involve setting up a version control system, configuring CI/CD tools, and ensuring automated deployment of their application.
+
+Requirements
+1. Project Structure
+Use the existing travel booking microservice structure:
+
+travel-booking/
+|-- discovery-service/
+|-- api-gateway/
+|-- flight-service/
+|-- hotel-service/
+|-- car-rental-service/
+|-- docker-compose.yml
+|-- Jenkinsfile (or .travis.yml for Travis CI)
+|-- README.md
+2. Docker Configuration
+Create a Dockerfile for each microservice.
+Example Dockerfile for Flight Service
+
+FROM openjdk:11-jre-slim
+COPY target/flight-service-0.0.1-SNAPSHOT.jar flight-service.jar
+ENTRYPOINT ["java", "-jar", "/flight-service.jar"]
+Create a docker-compose.yml file to manage the multi-container application.
+Example docker-compose.yml
+
+version: '3'
+services:
+  discovery-service:
+    [...]
+  
+  api-gateway:
+    [...]
+  
+  flight-service:
+    [...]
+
+  hotel-service:
+    [...]
+
+  car-rental-service:
+    [...]
+3. CI/CD Configuration
+Choose between Jenkins or Travis CI for your CI/CD pipeline.
+A. Jenkins Configuration
+Create a Jenkinsfile at the root of your project.
+Example Jenkinsfile
+
+pipeline {
+    agent any
+    stages {
+        stage('Build') {
+            [...]
+        }
+        stage('Docker Build') {
+            [...]
+        }
+        stage('Run Tests') {
+            [...]
+        }
+        stage('Code Coverage') {
+            [...]
+        }
+        stage('Deploy to Heroku') {
+            [...]
+        }
+    }
+}
+B. Travis CI Configuration
+Create a .travis.yml file.
+Example .travis.yml:
+language: java
+jdk:
+    [...]
+
+services:
+    [...]
+
+script:
+    [...]
+
+after_success:
+    [...]
+4. Code Coverage Configuration
+Integrate a code coverage tool like CodeCov or JaCoCo.
+5. Cloud Deployment
+Choose a cloud service like Heroku, DigitalOcean, or AWS to host your application.
+Configure deployment scripts in your CI/CD setup.
+6. Unit Testing
+Ensure that each microservice has unit tests implemented using JUnit.
+
+Write meaningful tests for the core functionalities of each microservice.
+
+7. Running the Application Locally
+Use Docker Compose to run the entire application locally:
+docker-compose up
+
+Additional Resources:
+
+Docker Documentation
+https://docs.docker.com/
+
+Jenkins Documentation
+https://www.jenkins.io/doc/
+
+Travis CI Documentation
+https://docs.travis-ci.com/
+
+Heroku Documentation
+https://devcenter.heroku.com/categories/reference
+
+CodeCov Documentation
+https://docs.codecov.com/
